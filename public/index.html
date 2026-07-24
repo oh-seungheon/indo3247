@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote Control</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎛️</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" id="statusDot" title="disconnected"></span>
+      <h1>🎛️ Remote Control</h1>
+    </div>
+    <div class="host-meta" id="hostMeta">not connected</div>
+  </header>
+
+  <!-- Token gate -->
+  <section id="authPanel" class="auth card">
+    <h2>Enter access token</h2>
+    <p class="muted">The token is printed in the terminal where you launched <code>remote-control</code>.</p>
+    <form id="authForm">
+      <input type="password" id="tokenInput" placeholder="Access token" autocomplete="off" spellcheck="false" />
+      <label class="remember"><input type="checkbox" id="rememberToken" /> Remember on this browser</label>
+      <button type="submit">Connect</button>
+    </form>
+    <p id="authError" class="error" hidden></p>
+  </section>
+
+  <!-- Main app (hidden until authed) -->
+  <main id="app" hidden>
+    <section class="grid">
+      <div class="card stats">
+        <h2>System</h2>
+        <dl id="systemStats" class="stat-list"><dd class="muted">loading…</dd></dl>
+        <div class="meter" title="Memory used">
+          <div class="meter-fill" id="memFill"></div>
+        </div>
+        <button class="ghost" id="refreshBtn">↻ Refresh</button>
+      </div>
+
+      <div class="card files">
+        <h2>Files</h2>
+        <div class="path-bar">
+          <button class="ghost" id="upBtn" title="Up one level">⬆</button>
+          <code id="currentPath">.</code>
+        </div>
+        <ul id="fileList" class="file-list"><li class="muted">—</li></ul>
+      </div>
+    </section>
+
+    <section class="card terminal">
+      <h2>Command</h2>
+      <div class="cmd-row">
+        <span class="prompt">$</span>
+        <input type="text" id="cmdInput" placeholder="e.g. uname -a   ·   ls -la   ·   df -h"
+               autocomplete="off" spellcheck="false" />
+        <button id="runBtn">Run</button>
+        <button class="ghost" id="clearBtn" title="Clear output">Clear</button>
+      </div>
+      <pre id="output" class="output" aria-live="polite"></pre>
+      <div class="quick">
+        <span class="muted">Quick:</span>
+        <button class="chip" data-cmd="uname -a">uname -a</button>
+        <button class="chip" data-cmd="uptime">uptime</button>
+        <button class="chip" data-cmd="df -h">df -h</button>
+        <button class="chip" data-cmd="free -h">free -h</button>
+        <button class="chip" data-cmd="ps aux --sort=-%cpu | head -12">top procs</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer muted">
+    <span>indo3247 · remote-control</span>
+    <button class="linklike" id="logoutBtn" hidden>Forget token</button>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

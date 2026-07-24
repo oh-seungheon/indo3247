@@ -1,0 +1,25 @@
+{
+  "name": "indo3247-remote-control",
+  "version": "1.0.0",
+  "description": "A CLI-launched, web-based remote control panel for a host machine. Zero runtime dependencies.",
+  "type": "commonjs",
+  "bin": {
+    "remote-control": "bin/remote-control.js"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node bin/remote-control.js",
+    "dev": "node bin/remote-control.js --host 127.0.0.1 --port 4545"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "remote-control",
+    "cli",
+    "web",
+    "dashboard",
+    "terminal"
+  ],
+  "license": "MIT"
+}
