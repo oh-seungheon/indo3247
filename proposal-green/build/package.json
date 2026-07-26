@@ -1,0 +1,12 @@
+{
+  "name": "buan-chicken-festival-proposal",
+  "version": "4.1.0",
+  "description": "부안 닭축제 종합제안서 v4 — pptxgenjs 빌드 패키지",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0"
+  }
+}
