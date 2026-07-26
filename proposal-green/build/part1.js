@@ -290,22 +290,25 @@ module.exports = function (pres) {
     header(s, { n: '1.7', title: '지역브랜드',
       lead: '지역의 이름과 하나의 상품이 결합할 때 브랜드가 됩니다. 영광 하면 굴비, 부안 하면 닭입니다.' });
     const brands = [
-      { img: 'gulbi.jpg', place: '영광', prod: '굴비', d: '법성포 굴비. 지역명이 곧 품질 보증이 되어 프리미엄 수산물 브랜드로 자리잡았습니다.' },
-      { img: 'insam.jpg', place: '금산', prod: '인삼', d: '국제인삼축제와 인삼시장을 축으로 생산·유통·관광을 묶어 세계 인삼 거래 중심지가 되었습니다.' },
-      { img: 'jangryu.jpg', place: '순창', prod: '장류', d: '고추장민속마을·장류 클러스터. 농식품부 K-미식벨트로 이어지는 전북의 성공 사례입니다.', tag: '전북 선례' },
-      { img: 'buan_chicken.jpg', place: '부안', prod: '닭', d: '생산(참프레)·문화(계림)·관광(변산)이 이미 한 곳에. 남은 것은 이름을 붙이는 일뿐입니다.', hero: true },
+      { img: 'gulbi.jpg', place: '영광', prod: '굴비', tag: '수산 특산', d: '법성포 굴비. 지역명이 곧 품질 보증이 되어 프리미엄 수산물 브랜드로 자리잡았습니다.' },
+      { img: 'insam.jpg', place: '금산', prod: '인삼', tag: '약용 특산', d: '국제인삼축제와 인삼시장을 축으로 생산·유통·관광을 묶어 세계 인삼 거래 중심지가 되었습니다.' },
+      { img: 'jangryu.jpg', place: '순창', prod: '장류', tag: '전북 선례', tagHi: true, d: '고추장민속마을·장류 클러스터. 농식품부 K-미식벨트로 이어지는 전북의 성공 사례입니다.' },
+      { img: 'buan_chicken.jpg', place: '부안', prod: '닭', tag: '다음 차례', hero: true, d: '생산(참프레)·문화(계림)·관광(변산)이 이미 한 곳에. 남은 것은 이름을 붙이는 일뿐입니다.' },
     ];
     const w = 4.44, gap = 0.28, y0 = 2.75;
     brands.forEach((b, i) => {
       const x = G.ml + i * (w + gap);
       wbox(s, { x, y: y0, w, h: 5.55, hero: b.hero, line: b.hero ? C.mid : C.line });
       hex(s, b.img, { x: x + w / 2 - 1.35, y: y0 + 0.3, w: 2.7, h: 2.3 });
-      txt(s, b.place, { x: x + 0.3, y: y0 + 2.75, w: 1.5, h: 0.62, size: 28, bold: true, color: C.text, valign: 'middle' });
-      txt(s, '=', { x: x + 1.7, y: y0 + 2.75, w: 0.5, h: 0.62, size: 24, bold: true, color: b.hero ? C.mid : C.line, align: 'center', valign: 'middle' });
-      txt(s, b.prod, { x: x + 2.2, y: y0 + 2.75, w: 1.9, h: 0.62, size: 28, bold: true, color: b.hero ? C.dark : C.mid, valign: 'middle' });
-      if (b.tag) chip(s, { x: x + 0.3, y: y0 + 3.5, w: 1.66, h: 0.4, t: b.tag, fill: C.mid2, size: 13 });
-      s.addShape('line', { x: x + 0.3, y: y0 + (b.tag ? 4.05 : 3.55), w: w - 0.6, h: 0, line: { color: C.line, width: 1.25 } });
-      txt(s, b.d, { x: x + 0.3, y: y0 + (b.tag ? 4.22 : 3.75), w: w - 0.6, h: 1.7, size: 15, color: C.sub, valign: 'top', ls: 1.3 });
+      txt(s, b.place, { x: x + 0.3, y: y0 + 2.7, w: 1.5, h: 0.6, size: 28, bold: true, color: C.text, valign: 'middle' });
+      txt(s, '=', { x: x + 1.7, y: y0 + 2.7, w: 0.5, h: 0.6, size: 24, bold: true, color: b.hero ? C.mid : C.line, align: 'center', valign: 'middle' });
+      txt(s, b.prod, { x: x + 2.2, y: y0 + 2.7, w: 1.9, h: 0.6, size: 28, bold: true, color: b.hero ? C.dark : C.mid, valign: 'middle' });
+      // 태그 칩 — 네 카드 동일 위치 (줄 정렬)
+      const chFill = b.hero ? C.dark : (b.tagHi ? C.mid2 : C.soft);
+      const chTc = b.hero ? C.lime : (b.tagHi ? C.white : C.mid2);
+      chip(s, { x: x + 0.3, y: y0 + 3.42, w: 1.9, h: 0.42, t: b.tag, fill: chFill, tc: chTc, size: 13, line: (b.hero || b.tagHi) ? null : C.line });
+      s.addShape('line', { x: x + 0.3, y: y0 + 4.0, w: w - 0.6, h: 0, line: { color: C.line, width: 1.25 } });
+      txt(s, b.d, { x: x + 0.3, y: y0 + 4.16, w: w - 0.6, h: 1.32, size: 15, color: C.sub, valign: 'top', ls: 1.3 });
     });
     banner(s, hl('순창은 이미 해냈습니다. 같은 방식으로 ', '부안', '이 다음 차례입니다.'));
     src(s, '농림축산식품부 K-미식벨트 · 각 지자체');
