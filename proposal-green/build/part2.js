@@ -167,7 +167,7 @@ module.exports = function (pres) {
     const s = pres.addSlide();
     header(s, { n: '3.2', title: '사업 개요',
       lead: '3일의 행사가 아니라, 365일 브랜드의 출발점입니다.' });
-    img(s, 'venue.jpg', { x: G.ml, y: 2.72, w: G.cw, h: 1.66 });
+    img(s, 'venue.jpg', { x: G.ml, y: 2.68, w: G.cw, h: 2.2 });
     const rows = [
       ['명칭', '부안 닭축제 (가칭)', '주최', '부안군 · 전북특별자치도'],
       ['시기', '매년 10월 중 3일간', '주관', '부안군대표축제추진위원회'],
@@ -175,23 +175,23 @@ module.exports = function (pres) {
       ['성격', '산업연계형 문화관광축제', '목표', '1년차 15만 → 3년차 40만명'],
       ['개최', '2028년 제1회', '재원', '지방소멸대응기금 · 국비 · 기업협찬'],
     ];
-    const ty = 4.6, cw = [1.5, 6.6, 1.5, 8.4];
+    const ty = 4.98, cw = [1.5, 6.6, 1.5, 8.4];
     rows.forEach((r, i) => {
-      const y = ty + i * 0.56;
-      if (i % 2 === 0) box(s, { x: G.ml, y, w: G.cw, h: 0.56, fill: C.soft, r: 0 });
+      const y = ty + i * 0.54;
+      if (i % 2 === 0) box(s, { x: G.ml, y, w: G.cw, h: 0.54, fill: C.soft, r: 0 });
       let x = G.ml;
       r.forEach((cell, j) => {
         const lab = j % 2 === 0;
-        txt(s, cell, { x: x + (lab ? 0.3 : 0.16), y, w: cw[j] - 0.3, h: 0.56, size: lab ? 15 : T.body, bold: lab, color: lab ? C.dark : C.text, valign: 'middle' });
+        txt(s, cell, { x: x + (lab ? 0.3 : 0.16), y, w: cw[j] - 0.3, h: 0.54, size: lab ? 15 : T.body, bold: lab, color: lab ? C.dark : C.text, valign: 'middle' });
         x += cw[j];
       });
     });
-    const gy = 7.55;
+    const gy = 7.78;
     txt(s, '3개년 방문객 목표', { x: G.ml, y: gy, w: 5, h: 0.4, size: 16, bold: true, color: C.dark, valign: 'middle' });
     [['1년차 2028', '15만명', C.mid], ['2년차 2029', '25만명', C.mid2], ['3년차 2030', '40만명', C.dark]]
       .forEach((g, i) => {
-        const x = G.ml + i * 6.2, y = gy + 0.46;
-        box(s, { x, y, w: 5.94, h: 0.84, fill: g[2], r: 0.1 });
+        const x = G.ml + i * 6.2, y = gy + 0.44;
+        box(s, { x, y, w: 5.94, h: 0.82, fill: g[2], r: 0.1 });
         txt(s, g[0], { x: x + 0.4, y, w: 2.4, h: 0.84, size: 16, color: 'E4EFDA', valign: 'middle' });
         txt(s, g[1], { x: x + 2.7, y, w: 2.9, h: 0.84, size: 28, bold: true, color: C.white, align: 'right', valign: 'middle' });
       });
